@@ -107,22 +107,17 @@ window.UMSUpdater = {
       const targetUrl = `https://raw.githubusercontent.com/${username}/${repository}/main/version.json`;
       const manifest = chrome.runtime.getManifest();
       const currentVersion = manifest.version;
-
       const response = await fetch(targetUrl, { cache: "no-cache" });
       if (!response.ok) return;
-
       const data = await response.json();
       if (!data || !data.version || !data.releaseUrl) return;
-
       const latestVersion = data.version;
       const releaseUrl = data.releaseUrl;
-
       let changelogArray = [];
       if (data.changelog)
         changelogArray = window.isArabicPage
           ? data.changelog.ar || []
           : data.changelog.en || [];
-
       if (window.UMSUpdater.isNewerVersion(currentVersion, latestVersion))
         window.UMSUpdater.renderUpdateBanner(
           currentVersion,

@@ -30,6 +30,7 @@ jobs:
             -x ".git/*" \
             -x ".github/*" \
             -x ".gitignore" \
+            -x "/assets/showcase.png" \
             -x "version.json" \
             -x "README.md" \
             -x "node_modules/*"

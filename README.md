@@ -113,7 +113,7 @@ On every page load, it securely fetches a tiny raw `version.json` file directly 
 
 ---
 
-## 🚀 Installation
+## 🚀 Chrome Installation
 
 1. Download or clone this repository.
 2. Open Google Chrome and navigate to:
@@ -127,6 +127,26 @@ chrome://extensions
 4. Click the **Load unpacked** button in the top-left.
 5. Select the project root folder.
 6. Open or refresh the UMS **Student Grades** page.
+
+---
+
+## 🦊 Firefox Installation
+
+FCIS GPA Helper is also compatible with Mozilla Firefox.
+
+### Temporary Installation (Development)
+
+1. Open Firefox and navigate to:
+
+```text
+about:debugging#/runtime/this-firefox
+```
+
+2. Click **Load Temporary Add-on**.
+3. Select the extension's `manifest.json` file from the project folder.
+4. Open or refresh the UMS **Student Grades** page.
+
+> **Note:** Temporary add-ons are removed when Firefox is closed. For permanent installation, the extension should be distributed through the Firefox Add-ons (AMO) store once published.
 
 ---
 

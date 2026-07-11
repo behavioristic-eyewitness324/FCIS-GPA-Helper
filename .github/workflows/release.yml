@@ -1,4 +1,4 @@
-name: Build and Release Extension
+name: Build and Update Release
 
 on:
   push:
@@ -15,12 +15,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Build version
+      - name: Read version
         id: version
         run: |
-          BASE_VERSION=$(jq -r '.version' manifest.json)
-          VERSION="${BASE_VERSION}.${{ github.run_number }}"
+          VERSION=$(jq -r '.version' manifest.json)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create ZIP
@@ -29,16 +30,43 @@ jobs:
             -x ".git/*" \
             -x ".github/*" \
             -x ".gitignore" \
-            -x "version.json" \
             -x "README.md" \
             -x "node_modules/*"
 
-      - name: Create Release
+      - name: Update tag
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag -f "$TAG"
+          git push origin "refs/tags/$TAG" --force
+
+      - name: Delete old asset (if exists)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+          ASSET_NAME="FCIS-GPA-Helper-v${{ steps.version.outputs.version }}.zip"
+
+          RELEASE=$(gh api repos/${{ github.repository }}/releases/tags/$TAG || true)
+
+          if [ -n "$RELEASE" ]; then
+            ASSET_ID=$(echo "$RELEASE" | jq -r ".assets[] | select(.name==\"$ASSET_NAME\") | .id")
+
+            if [ "$ASSET_ID" != "" ] && [ "$ASSET_ID" != "null" ]; then
+              gh api \
+                --method DELETE \
+                repos/${{ github.repository }}/releases/assets/$ASSET_ID
+            fi
+          fi
+
+      - name: Create or Update Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: FCIS GPA Helper v${{ steps.version.outputs.version }}
           generate_release_notes: true
           make_latest: true
-          files: |
-            FCIS-GPA-Helper-v${{ steps.version.outputs.version }}.zip
+          files: FCIS-GPA-Helper-v${{ steps.version.outputs.version }}.zip

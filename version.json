@@ -1,0 +1,14 @@
+{
+  "version": "1.0.3",
+  "releaseUrl": "https://github.com/AhmedAbdoDev/FCIS-GPA-Helper/releases/latest",
+  "changelog": {
+    "en": [
+      "Added an automated update notification system via GitHub integration",
+      "Optimized DOM structure rendering for smoother calculations"
+    ],
+    "ar": [
+      "إضافة نظام الإشعارات الذكي للتحقق من وجود تحديثات جديدة عبر جيتهب",
+      "تحسين آلية رندرة وحقن العناصر لضمان استقرار الأداء"
+    ]
+  }
+}

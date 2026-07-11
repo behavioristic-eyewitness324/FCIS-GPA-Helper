@@ -1,5 +1,5 @@
 (() => {
-  const main = () => {
+  const main = async () => {
     const semesters = window.parseUMSPage();
     if (!semesters || semesters.length === 0) return;
     const chronologicalSemesters = [...semesters].reverse();
@@ -25,6 +25,7 @@
         calculatedCGPA,
       );
     });
+    await window.UMSUpdater.checkForUpdates();
   };
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", main);

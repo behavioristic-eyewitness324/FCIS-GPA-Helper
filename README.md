@@ -20,6 +20,12 @@ No configuration or user interaction is required.
 
 ---
 
+## 📸 Interface Preview (Before vs After)
+
+![FCIS GPA Helper Showcase](assets/showcase.png)
+
+---
+
 ## 📁 Project Structure
 
 ```text

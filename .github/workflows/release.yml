@@ -1,0 +1,43 @@
+name: Build and Release Extension
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build version
+        id: version
+        run: |
+          BASE_VERSION=$(jq -r '.version' manifest.json)
+          VERSION="${BASE_VERSION}.${{ github.run_number }}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create ZIP
+        run: |
+          zip -r "FCIS-GPA-Helper-v${{ steps.version.outputs.version }}.zip" . \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x ".gitignore" \
+            -x "README.md" \
+            -x "node_modules/*"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: FCIS GPA Helper v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          make_latest: true
+          files: |
+            FCIS-GPA-Helper-v${{ steps.version.outputs.version }}.zip

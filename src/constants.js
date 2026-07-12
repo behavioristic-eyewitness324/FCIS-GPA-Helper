@@ -15,7 +15,7 @@ window.UMS_GRADE_MAP = {
 };
 
 window.UMS_PASS_GRADES = ["ناجح", "Pass"];
-
+window.UMS_EXCUSES_SKIP = ["مرضى", "عذر", "موافقة القومسيون الطبى", "طبى"];
 window.isArabicPage =
   document.body.innerText.includes("معدل النقاط") ||
   document.body.innerText.includes("التقدير") ||

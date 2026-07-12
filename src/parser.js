@@ -27,16 +27,18 @@ window.parseUMSPage = () => {
         const hasGpaChip = !!termEl.querySelector(".ums-chip--gpa");
         const courseElements = termEl.querySelectorAll(".ums-course");
 
-        const courses = Array.from(courseElements).map((courseEl) => {
+        const courses = Array.from(courseElements).reduce((acc, courseEl) => {
           const code =
             courseEl.querySelector(".ums-course__code")?.innerText?.trim() ||
             "";
           const name =
             courseEl.querySelector(".ums-course__title")?.innerText?.trim() ||
             code;
+
           let grade = null;
           let hours = 0;
           let points = null;
+          let isExcuseCourse = false;
 
           const rows = courseEl.querySelectorAll(".ums-course__row");
           rows.forEach((row) => {
@@ -47,17 +49,19 @@ window.parseUMSPage = () => {
               row.querySelector(".ums-course__row-value")?.innerText?.trim() ||
               null;
 
-            if (label === dict.gradeLabel || label?.startsWith("Grade")) {
+            if (window.UMS_EXCUSES_SKIP.includes(value)) isExcuseCourse = true;
+            if (label === dict.gradeLabel || label?.startsWith("Grade"))
               grade = value;
-            } else if (
+            else if (
               label === dict.hoursLabel ||
               label?.startsWith("Course Hours")
-            ) {
+            )
               hours = Number(value) || 0;
-            } else if (label === dict.pointsLabel || label === "Points") {
+            else if (label === dict.pointsLabel || label === "Points")
               points = value !== "" && value !== null ? Number(value) : null;
-            }
           });
+
+          if (isExcuseCourse) return acc;
 
           if (
             points === null &&
@@ -66,8 +70,9 @@ window.parseUMSPage = () => {
           )
             points = window.UMS_GRADE_MAP[grade];
 
-          return { code, name, hours, grade, points };
-        });
+          acc.push({ code, name, hours, grade, points });
+          return acc;
+        }, []);
 
         structuredData.push({
           year: yearTitle,

@@ -1,14 +1,10 @@
 {
-  "version": "1.0.4",
+  "version": "1.0.5",
   "releaseUrl": "https://github.com/AhmedAbdoDev/FCIS-GPA-Helper/releases/latest",
   "changelog": {
     "en": [
-      "Added an automated update notification system via GitHub integration",
-      "Optimized DOM structure rendering for smoother calculations"
+      "Added support for excused or postponed courses to prevent calculation errors"
     ],
-    "ar": [
-      "إضافة نظام الإشعارات الذكي للتحقق من وجود تحديثات جديدة عبر جيتهب",
-      "تحسين آلية رندرة وحقن العناصر لضمان استقرار الأداء"
-    ]
+    "ar": ["دعم معالجة المواد المؤجلة بأعذار طبية أو رسمية لمنع أخطاء الحسابات"]
   }
 }

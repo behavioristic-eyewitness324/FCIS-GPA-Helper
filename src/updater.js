@@ -104,7 +104,7 @@ window.UMSUpdater = {
     try {
       const username = "AhmedAbdoDev";
       const repository = "FCIS-GPA-Helper";
-      const targetUrl = `https://raw.githubusercontent.com/${username}/${repository}/main/version.json`;
+      const targetUrl = `https://raw.githubusercontent.com/${username}/${repository}/refs/heads/main/version.json`;
       const manifest = chrome.runtime.getManifest();
       const currentVersion = manifest.version;
       const response = await fetch(targetUrl, { cache: "no-cache" });

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FCIS GPA Helper",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Automatically calculate and display missing GPA and CGPA for FCIS Ain Shams students.",
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -22,6 +22,7 @@
         "src/parser.js",
         "src/calculator.js",
         "src/renderer.js",
+        "src/predictionForm.js",
         "src/updater.js",
         "src/index.js"
       ]

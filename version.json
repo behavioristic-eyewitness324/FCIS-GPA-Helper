@@ -3,8 +3,14 @@
   "releaseUrl": "https://github.com/AhmedAbdoDev/FCIS-GPA-Helper/releases/latest",
   "changelog": {
     "en": [
-      "Added support for excused or postponed courses to prevent calculation errors"
+      "Introduced a smart GPA Prediction module for unpublished or missing course grades",
+      "Added an interactive form to manually input expected grades for localized simulation",
+      "Optimized calculation pipeline to safeguard historical GPA and chronological CGPA sequencing"
     ],
-    "ar": ["دعم معالجة المواد المؤجلة بأعذار طبية أو رسمية لمنع أخطاء الحسابات"]
+    "ar": [
+      "إضافة نظام التوقعات الذكي (GPA Prediction) للمواد التي لم تنشر درجاتها بعد",
+      "إضافة نموذج تفاعلي ناعم يتيح للطالب إدخال درجاته المتوقعة أو المعروفة مسبقاً لحسابها محلياً",
+      "تحسين آلية المعالجة الزمنية لضمان استقرار حسابات المعدل الفصلي والتراكمي دون تداخل بين السنوات الدراسية"
+    ]
   }
 }

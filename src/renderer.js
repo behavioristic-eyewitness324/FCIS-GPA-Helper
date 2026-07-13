@@ -16,11 +16,17 @@ window.UMSRenderer = {
       else termBtn.appendChild(chipsContainer);
     }
 
-    if (chipsContainer.querySelector(".ums-chip--gpa")) return;
-
     const gradeLetter = window.getGradeLetterFromGPA(gpaValue);
     const dict = window.UMS_DICTIONARY;
 
+    const existingGradeChip = chipsContainer.querySelector(".ums-chip--grade");
+    const existingGpaChip = chipsContainer.querySelector(".ums-chip--gpa");
+
+    if (existingGradeChip && existingGpaChip) {
+      existingGradeChip.innerText = `${dict.gradeLabel}: ${gradeLetter}`;
+      existingGpaChip.innerText = `${dict.semesterGpaLabel}: ${gpaValue.toFixed(3)}`;
+      return;
+    }
     const gradeChip = document.createElement("span");
     gradeChip.className = "ums-chip ums-chip--grade";
     gradeChip.innerText = `${dict.gradeLabel}: ${gradeLetter}`;
@@ -32,10 +38,8 @@ window.UMSRenderer = {
     chipsContainer.appendChild(gradeChip);
     chipsContainer.appendChild(gpaChip);
   },
-
   renderCGPA: (roundElement, heroElement, cgpaValue) => {
     let targetHero = heroElement;
-
     if (!targetHero) {
       targetHero = document.createElement("div");
       targetHero.className = "ums-hero";
@@ -45,7 +49,6 @@ window.UMSRenderer = {
         roundElement.insertBefore(targetHero, roundTitle.nextSibling);
       else roundElement.prepend(targetHero);
     }
-
     let heroTop = targetHero.querySelector(".ums-hero__top");
     if (!heroTop) {
       heroTop = document.createElement("div");
@@ -60,23 +63,28 @@ window.UMSRenderer = {
       targetHero.appendChild(statsContainer);
     }
 
-    if (statsContainer.querySelector(".ums-stat")) return;
-
     const cgpaLetter = window.getGradeLetterFromGPA(cgpaValue);
     const dict = window.UMS_DICTIONARY;
 
-    heroTop.innerHTML = `
-      <div class="ums-stat">
-        <div class="ums-stat__label">${dict.cumulativeGradeLabel}</div>
-        <div class="ums-stat__value"><span class="ums-hero__grade-letter">  ${cgpaLetter}</span></div>
-      </div>
-      <div class="ums-hero__grade-text"></div>
-    `;
-    statsContainer.innerHTML = `
-      <div class="ums-stat">
-        <div class="ums-stat__label">${dict.cgpaLabel}</div>
-        <div class="ums-stat__value">${cgpaValue.toFixed(3)}</div>
-      </div>
-    `;
+    const gradeLetterSpan = heroTop.querySelector(".ums-hero__grade-letter");
+    if (gradeLetterSpan) gradeLetterSpan.innerText = ` ${cgpaLetter}`;
+    else
+      heroTop.innerHTML = `
+        <div class="ums-stat">
+          <div class="ums-stat__label">${dict.cumulativeGradeLabel}</div>
+          <div class="ums-stat__value"><span class="ums-hero__grade-letter"> ${cgpaLetter}</span></div>
+        </div>
+        <div class="ums-hero__grade-text"></div>
+      `;
+    const cgpaValueDiv = statsContainer.querySelector(".ums-stat__value");
+
+    if (cgpaValueDiv) cgpaValueDiv.innerText = cgpaValue.toFixed(3);
+    else
+      statsContainer.innerHTML = `
+        <div class="ums-stat">
+          <div class="ums-stat__label">${dict.cgpaLabel}</div>
+          <div class="ums-stat__value">${cgpaValue.toFixed(3)}</div>
+        </div>
+      `;
   },
 };

